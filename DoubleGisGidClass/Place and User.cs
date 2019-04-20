@@ -16,36 +16,6 @@ namespace DoubleGisGidClasses
         /// Список мест
         /// </summary>
         public List<Place> ListOfPlaces { get; set; }
-        /// <summary>
-        /// Для представителей мест города регистрация нового места
-        /// </summary>
-        public RegistrationPlace Registration { get; set; }
-    }
-    /// <summary>
-    /// Данные, вводимые представителем для регистрации места
-    /// </summary>
-    public class RegistrationPlace
-    {
-        /// <summary>
-        /// Адрес места
-        /// </summary>      
-        public Address Address { get; set; }
-        /// <summary>
-        /// Название места
-        /// </summary>
-        public string Name { get; set; }
-        /// <summary>
-        /// Описание места
-        /// </summary>
-        public string Discription { get; set; }
-        /// <summary>
-        /// Фото
-        /// </summary>
-        public byte[] MainPhoto { get; set; }
-        /// <summary>
-        /// Контакты с местом
-        /// </summary>
-        public Contacts Contacts { get; set; }
     }
 
     /// <summary>
@@ -54,15 +24,11 @@ namespace DoubleGisGidClasses
     public class Place
     {
         /// <summary>
-        /// Список ключевых слов, которые пользователи задают месту(например #Вкусно , #Дёшево)
-        /// </summary>
-        public List<string> KeyWords { get; set; }
-        /// <summary>
         /// Название места
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// Рейтинг места, составляемый пользователем
+        /// Рейтинг места, составляемый пользователями
         /// </summary>
         public Rating Rating { get; set; }
         /// <summary>
@@ -70,7 +36,7 @@ namespace DoubleGisGidClasses
         /// </summary>
         public Information Information { get; set; }
         /// <summary>
-        /// Фото
+        /// Фото(путь, где хранится фото)
         /// </summary>
         public byte[] MainPhoto { get; set; }
         /// <summary>
@@ -81,6 +47,10 @@ namespace DoubleGisGidClasses
         /// Комментарии пользователей о месте
         /// </summary>
         public CommentsOfPlace Comments { get; set; }
+        /// <summary>
+        /// Дата регистрации места
+        /// </summary>
+        public DateTime RegistrationDate { get; set; }
 
     }
     /// <summary>
@@ -136,7 +106,7 @@ namespace DoubleGisGidClasses
         /// <summary>
         /// Номера телефона представителей места(при необходимости)
         /// </summary>
-        public List<int> PhoneNumber { get; set; }
+        public List<string> PhoneNumber { get; set; }
         /// <summary>
         /// Ссылки на соц.сети
         /// </summary>
@@ -158,7 +128,7 @@ namespace DoubleGisGidClasses
         /// <summary>
         /// Список Адресов места
         /// </summary>
-        public List<Address> Addresses { get; set; }
+        public Address Address { get; set; }
     }
     /// <summary>
     /// Адрес места
@@ -210,26 +180,10 @@ namespace DoubleGisGidClasses
     public class User
     {
         /// <summary>
-        /// Регистрация пользователя
-        /// </summary>
-        public RegistrationUser Registration { get; set; }
-        /// <summary>
         /// Маршруты пользователя
         /// </summary>
         public List<Rought> Roughts { get; set; }
-
-    }
-
-    public class Rought
-    {
-        /// <summary>
-        /// Маршрут, в виде списка мест, составляемый пользователем 
-        /// </summary>
-        public List<Place> MyRought { get; set; }
-    }
-
-    public class RegistrationUser
-    {
+        public int Number { get; set; }
         /// <summary>
         /// Логин
         /// </summary>
@@ -246,31 +200,33 @@ namespace DoubleGisGidClasses
         /// Пол
         /// </summary>
         public GenderType Gender { get; set; }
+
     }
 
-    public enum TypeOfUser
+    public class Rought
     {
         /// <summary>
-        /// Обычный Пользователь
+        /// Маршрут, в виде списка мест, составляемый пользователем 
         /// </summary>
-        User,
-        /// <summary>
-        /// Представитель места
-        /// </summary>
-        SpokesmanOfPlace,
-        /// <summary>
-        /// Администратор
-        /// </summary>
-        Admin
+        public List<Place> MyRought { get; set; }
     }
 
-    public enum GenderType
+    public class TypeOfUser
     {
-        Man,
-        Woman,
+
         /// <summary>
-        /// Защита от проблем с толерантностью
+        /// Массив типов пользователя (Обычный пользователь, Представитель места, Администратор)
         /// </summary>
-        Another
+        public string[] AlltypeOfUser = new string[] { "User", "SpokesmanOfPlace", "Admin" };
+        public string CurrentTypeOfUser { get; set; }
+    }
+
+    public class GenderType
+    {
+        /// <summary>
+        /// Массив гендеров
+        /// </summary>
+        public string[] AllTypeOfGender = new string[] { "Man", "Woman", "Another" };
+        public string CurrentTypeOfGender { get; set; }
     }
 }
